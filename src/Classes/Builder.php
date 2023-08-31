@@ -545,6 +545,7 @@ class Builder
             'track_device_type'              => $this->trackDeviceType,
             'activated_at'                   => $this->activateAt,
             'deactivated_at'                 => $this->deactivateAt,
+            'created_by'                     => 1,
         ];
     }
 
