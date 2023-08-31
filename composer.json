@@ -1,17 +1,15 @@
 {
-  "name": "ashallendesign/short-url",
+  "name": "popular/short-url",
   "description": "A Laravel package for creating shortened URLs for your web apps.",
   "type": "library",
   "homepage": "https://github.com/ash-jc-allen/short-url",
   "license": "MIT",
   "authors": [
     {
-      "name": "Ash Allen",
-      "email": "mail@ashallendesign.co.uk"
+      "name": "popular",
     }
   ],
   "keywords": [
-    "ashallendesign",
     "short-urls",
     "url-shortener",
     "laravel",
