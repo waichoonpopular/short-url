@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Support\Facades\Auth;
 
 class Builder
 {
@@ -545,7 +546,7 @@ class Builder
             'track_device_type'              => $this->trackDeviceType,
             'activated_at'                   => $this->activateAt,
             'deactivated_at'                 => $this->deactivateAt,
-            'created_by'                     => 1,
+            'created_by'                     => Auth::user()->id,
         ];
     }
 

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class ShortURL.
@@ -35,7 +37,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ShortURL extends Model
 {
     use HasFactory;
-
+    use HasRoles;
     /**
      * The table associated with the model.
      *
@@ -200,5 +202,26 @@ class ShortURL extends Model
         }
 
         return $fields;
+    }
+
+    public static function getLatestUrl(){
+        $user = Auth::user();
+        $hasPermissionView = $user->hasPermissionTo('url-list');
+
+        if($hasPermissionView){
+            $isManager = $user->hasRole('Manager');
+            $isStaff = $user->hasRole('Staff');
+            if($isManager){
+                return self::where('created_by',Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            }
+            else if($isStaff){
+                return self::where('created_by',Auth::user()->report_to)->orderBy('created_at', 'desc')->get();  
+            }
+            else{
+                return self::orderBy('created_at', 'desc')->get();
+            }
+        }
+
+        
     }
 }
