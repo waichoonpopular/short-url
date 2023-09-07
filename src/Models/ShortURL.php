@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class ShortURL.
  *
@@ -38,6 +38,7 @@ class ShortURL extends Model
 {
     use HasFactory;
     use HasRoles;
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
