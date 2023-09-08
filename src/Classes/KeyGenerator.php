@@ -44,7 +44,7 @@ class KeyGenerator
         do {
             $ID++;
             $key = $this->hashids->encode($ID);
-        } while (ShortURL::where('url_key', $key)->exists());
+        } while (ShortURL::withTrashed()->where('url_key', $key)->exists());
 
         return $key;
     }
