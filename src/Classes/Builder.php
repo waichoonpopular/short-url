@@ -32,6 +32,8 @@ class Builder
      */
     protected $destinationUrl;
 
+    protected $title;
+
     /**
      * Whether or not if the shortened URL can be
      * accessed more than once.
@@ -241,6 +243,15 @@ class Builder
         }
 
         $this->destinationUrl = $url;
+
+        return $this;
+    }
+
+
+    public function title(string $title): self
+    {
+
+        $this->destinationUrl = $title;
 
         return $this;
     }
@@ -531,6 +542,7 @@ class Builder
 
         return [
             'destination_url'                => $this->destinationUrl,
+            'title'                          => $this->title,
             'default_short_url'              => $this->buildDefaultShortUrl(),
             'url_key'                        => $this->urlKey,
             'single_use'                     => $this->singleUse,

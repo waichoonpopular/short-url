@@ -53,6 +53,7 @@ class ShortURL extends Model
      */
     protected $fillable = [
         'destination_url',
+        'title',
         'default_short_url',
         'url_key',
         'single_use',
