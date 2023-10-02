@@ -580,6 +580,7 @@ class Builder
            // throw new ShortURLException('A short URL with this key already exists.');
            return ['success' => false,'message' => 'A short URL with this key already exists.'];
         }
+        return ['success' => true];
     }
 
     /**
