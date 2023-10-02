@@ -574,7 +574,7 @@ class Builder
      *
      * @throws ShortURLException
      */
-    protected function checkKeyDoesNotExist(): void
+    protected function checkKeyDoesNotExist()
     {
         if (ShortURL::where('url_key', $this->urlKey)->exists()) {
            // throw new ShortURLException('A short URL with this key already exists.');
