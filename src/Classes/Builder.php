@@ -236,10 +236,11 @@ class Builder
      *
      * @throws ShortURLException
      */
-    public function destinationUrl(string $url): self
+    public function destinationUrl(string $url)
     {
         if (! Str::startsWith($url, ['http://', 'https://'])) {
-            throw new ShortURLException('The destination URL must begin with http:// or https://');
+            // throw new ShortURLException('The destination URL must begin with http:// or https://');
+            return ['success' => false, 'message' => 'The destination URL must begin with http:// or https://'];
         }
 
         $this->destinationUrl = $url;
@@ -514,21 +515,25 @@ class Builder
      *
      * @throws ShortURLException
      */
-    public function make(): ShortURL
+    public function make()
     {
         if (! $this->destinationUrl) {
-            throw new ShortURLException('No destination URL has been set.');
+            // throw new ShortURLException('No destination URL has been set.');
+            return ['success' => false, 'message' => 'No destination URL has been set.'];
         }
 
         $data = $this->toArray();
 
-        $this->checkKeyDoesNotExist();
+        $checkExist = $this->checkKeyDoesNotExist();
+        if(!$checkExist['success']){
+            return $checkExist;
+        }
 
         $shortURL = ShortURL::create($data);
 
         $this->resetOptions();
 
-        return $shortURL;
+        return ['success' => true, 'data' => $shortURL];
     }
 
     /**
@@ -572,7 +577,8 @@ class Builder
     protected function checkKeyDoesNotExist(): void
     {
         if (ShortURL::where('url_key', $this->urlKey)->exists()) {
-            throw new ShortURLException('A short URL with this key already exists.');
+           // throw new ShortURLException('A short URL with this key already exists.');
+           return ['success' => false,'message' => 'A short URL with this key already exists.'];
         }
     }
 
