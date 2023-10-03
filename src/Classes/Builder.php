@@ -252,7 +252,7 @@ class Builder
     public function title(string $title): self
     {
 
-        $this->destinationUrl = $title;
+        $this->title = $title;
 
         return $this;
     }
